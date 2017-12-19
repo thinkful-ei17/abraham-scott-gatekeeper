@@ -67,11 +67,11 @@ const USERS = [
 // The easiest way to test your app as you work on it is to use Postman.Make a GET request to base - url -for-your - app / api / users / me.You'll need to set a request header in the headers tab, with a key x-username-and-password and a value like user=joeschmoe@business.com&pass=password. */
 
 function gateKeeper(req, res, next) {
-  console.log('gateKeeper ran');
   const userString = (req.headers['x-username-and-password']); 
   console.log(queryString.parse(userString)); 
   const { user, pass } = queryString.parse(userString);
   console.log(user, pass);
+  req.user = (USERS.find(u => user === u.userName && pass === u.password));
   next();
 }
 
